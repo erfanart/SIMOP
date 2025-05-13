@@ -4,6 +4,7 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+MODBUS/
 
 # system
 *.o
@@ -15,4 +16,3 @@ Makefile
 .vscode/
 .idea/
 *.code-workspace
-MODBUS
