@@ -1,0 +1,17 @@
+# build artifacts
+Backend/build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# system
+*.o
+*.obj
+*.log
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace

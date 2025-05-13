@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Sensor Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>Real-Time Sensor Dashboard</h1>
+    <div id="sensor-data">
+        Loading sensor data...
+    </div>
+
+    <script>
+        // Connect to the Flask-SocketIO server
+        var socket = io.connect('http://' + '10.140.0.30' + ':' + '6000/');
+
+        // Listen for 'sensor_data' events from the server
+        socket.on('sensor_data', function(data) {
+            // Display the sensor values dynamically
+            document.getElementById('sensor-data').innerHTML = 'Sensor Values: ' + data.sensor_values.join(', ');
+        });
+    </script>
+</body>
+</html>
+

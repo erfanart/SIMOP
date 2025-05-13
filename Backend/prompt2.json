@@ -1,0 +1,14 @@
+{
+    "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a reasoning assistant. Use tools when needed. Follow this loop:\nThought → Action → PAUSE → Observation → Answer.\nAnswer in the same language as the user. Write only `PAUSE` after each Action. End final response after `Answer:`."
+      },
+      {
+        "role": "user",
+        "content": "سلام"
+      }
+    ]
+  }
+  
