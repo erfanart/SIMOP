@@ -1,10 +1,12 @@
 #pragma once
 #include <drogon/WebSocketController.h>
-#include "AIClient.h"
-#include "../ReActSystem/ReActAgent.h"
-#include "../ReActSystem/ToolRegistry.h"
+#include "../AI/AIClient.h"
+#include "../AI/ReActAgent.h"
+#include "../AI/ToolRegistry.h"
 #include <regex>
 #include "../plugins/Utils.h"
+#include <algorithm>
+#include <drogon/drogon.h>
 
 using namespace drogon;
 class AiChat : public drogon::WebSocketController<AiChat>

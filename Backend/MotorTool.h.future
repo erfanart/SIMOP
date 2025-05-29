@@ -1,0 +1,76 @@
+#pragma once
+#include "../Tool.h"
+#include "../../plugins/ModbusRTUMaster.h"
+#include <memory>
+#include <optional>
+#include <string>
+#include <algorithm>
+#include <cctype>
+
+class MotorTool : public Tool
+{
+public:
+    explicit MotorTool(std::shared_ptr<ModbusRTUMaster> modbus)
+        : modbus_(std::move(modbus)) {}
+
+    std::string name() const override { return "motor"; }
+
+    std::string description() const override
+    {
+        return R"(
+This tool controls the motor via Modbus. Usage:
+- motor(read) : Read motor RPM and speed.
+- motor(run)  : Start the motor.
+- motor(stop) : Stop the motor.
+)";
+    }
+
+    std::string run(const std::string &input) override
+    {
+        if (!modbus_)
+        {
+            return "❌ Modbus connection is not available.";
+        }
+
+        std::string action = trim(input);
+
+        if (action == "read")
+        {
+            auto rpm = modbus_->readRegister(0x0001);  // example address
+            auto speed = modbus_->readRegister(0x0002); // example address
+
+            if (!rpm || !speed)
+            {
+                return "❌ Failed to read motor data.";
+            }
+
+            return "Motor RPM: " + std::to_string(*rpm) + ", Speed: " + std::to_string(*speed);
+        }
+        else if (action == "run")
+        {
+            bool success = modbus_->writeCoil(0x0001, true);  // example coil
+            return success ? "✅ Motor started." : "❌ Failed to start motor.";
+        }
+        else if (action == "stop")
+        {
+            bool success = modbus_->writeCoil(0x0001, false);  // example coil
+            return success ? "✅ Motor stopped." : "❌ Failed to stop motor.";
+        }
+
+        return "❌ Unknown motor action: " + action;
+    }
+
+private:
+    std::shared_ptr<ModbusRTUMaster> modbus_;
+
+    static std::string trim(const std::string &str)
+    {
+        size_t start = str.find_first_not_of(" \t\n\r");
+        size_t end = str.find_last_not_of(" \t\n\r");
+
+        if (start == std::string::npos || end == std::string::npos)
+            return "";
+
+        return str.substr(start, end - start + 1);
+    }
+};

@@ -13,7 +13,7 @@ listeners:
   #     # address: Ip address,0.0.0.0 by default
   - address: 0.0.0.0
     #     # port: Port number
-    port: 6080
+    port: 80
 #     # https: If true, use https for security,false by default
 #     https: false
 #   - address: 0.0.0.0
@@ -312,7 +312,8 @@ plugins:
 # custom_config: custom configuration for users. This object can be get by the app().getCustomConfig() method.
 custom_config: 
   ai: 
-    token:  "<token>"
+    token:  "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"
     #modelName:  "meta-llama/llama-4-scout-17b-16e-instruct"
     modelName:  "meta-llama/llama-4-maverick-17b-128e-instruct"
     url: "https://api.groq.com/openai/v1/chat/completions"
+    promptFile: "./Prompt.txt"

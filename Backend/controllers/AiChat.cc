@@ -1,10 +1,10 @@
 
 #include "AiChat.h"
-#include "../ReActSystem/AITools/TempTool.h"
-#include "../ReActSystem/AITools/HumiTool.h"
+#include "../AI/AITools/TempTool.h"
+#include "../AI/AITools/HumiTool.h"
+#include "../AI/AITools/MotorTool.h"
 #include <algorithm>
 #include <drogon/drogon.h>
-
 
 using namespace drogon;
 std::string extractAnswerWithRegex(const std::string &text)
@@ -15,18 +15,19 @@ std::string extractAnswerWithRegex(const std::string &text)
     {
         return match[1].str();
     }
-    return  text;
+    return text;
 }
 
 AiChat::AiChat()
     : aiAgent_(
-        drogon::app().getCustomConfig()["ai"]["url"].asString(),
-        drogon::app().getCustomConfig()["ai"]["token"].asString(),
-        drogon::app().getCustomConfig()["ai"]["modelName"].asString())
+          drogon::app().getCustomConfig()["ai"]["url"].asString(),
+          drogon::app().getCustomConfig()["ai"]["token"].asString(),
+          drogon::app().getCustomConfig()["ai"]["modelName"].asString())
 {
     auto modbus = std::make_shared<ModbusRTUMaster>("/dev/ttyAMA0", 115200, 'N', 8, 1, 1);
     tools_.registerTool(std::make_shared<TempTool>(modbus));
     tools_.registerTool(std::make_shared<HumiTool>(modbus));
+    tools_.registerTool(std::make_shared<MotorTool>(modbus));
 
     LOG_INFO << "Token: " << drogon::app().getCustomConfig()["ai"]["token"].asString();
 }

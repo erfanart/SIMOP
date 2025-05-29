@@ -47,6 +47,7 @@ message(STATUS "Modbus includes: ${MODBUS_INCLUDE_DIR}")
 
 
 add_subdirectory(Depends/SubModules/drogon) 
+#add_subdirectory(Depends/SubModules/vosk-api) 
 target_link_libraries(${PROJECT_NAME} PRIVATE drogon ${MODBUS_LIBRARY})
 
 
@@ -68,8 +69,8 @@ aux_source_directory(controllers CTL_SRC)
 aux_source_directory(filters FILTER_SRC)
 aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(models MODEL_SRC)
-aux_source_directory(ReActSystem AI_SRC)
-aux_source_directory(ReActSystem/AITools AI_TOOLS)
+aux_source_directory(AI AI_SRC)
+aux_source_directory(AI/AITools AI_TOOLS)
 drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
                     ${CMAKE_CURRENT_BINARY_DIR})
 # use the following line to create views with namespaces.
