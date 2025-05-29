@@ -1,3 +1,9 @@
 [submodule "Backend/Depends/SubModules/drogon"]
 	path = Backend/Depends/SubModules/drogon
 	url = https://github.com/drogonframework/drogon.git
+[submodule "Backend/Depends/SubModules/vosk-api"]
+	path = Backend/Depends/SubModules/vosk-api
+	url = https://github.com/alphacep/vosk-api.git
+[submodule "Backend/Depends/SubModules/whisper"]
+	path = Backend/Depends/SubModules/whisper
+	url = https://github.com/ggerganov/whisper.cpp
